@@ -1,24 +1,22 @@
 package jm.task.core.jdbc;
-
-import jm.task.core.jdbc.dao.UserDao;
-import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import jm.task.core.jdbc.util.Util;
+import org.hibernate.service.ServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+
 
 public class Main {
     public static void main(String[] args) {
-        Util.getConnection();
-        UserDao userDao = new UserDaoJDBCImpl();
+        SessionFactory sessionFactory = Util.getSessionFactory();
+        Session session = null;
 
-        userDao.createUsersTable();
-
-        userDao.saveUser("Name1", "LastName1", (byte) 20);
-        userDao.saveUser("Name2", "LastName2", (byte) 25);
-        userDao.saveUser("Name3", "LastName3", (byte) 31);
-        userDao.saveUser("Name4", "LastName4", (byte) 38);
-
-        userDao.removeUserById(1);
-        userDao.getAllUsers();
-        userDao.cleanUsersTable();
-        userDao.dropUsersTable();
+        try {
+            session = sessionFactory.openSession();
+            System.out.println("Подключение к базе данных установлено успешно!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Не удалось подключиться к базе данных.");
+        }
     }
 }
