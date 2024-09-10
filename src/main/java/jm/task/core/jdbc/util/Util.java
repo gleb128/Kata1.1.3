@@ -45,7 +45,7 @@ public class Util {
                 settings.put(Environment.USER, "root");
                 settings.put(Environment.PASS, "root123123");
                 settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");
-                settings.put(Environment.HBM2DDL_AUTO, "create-drop");
+                settings.put(Environment.HBM2DDL_AUTO, "");
                 settings.put(Environment.SHOW_SQL, "true");
 
                 configuration.addAnnotatedClass(User.class);
